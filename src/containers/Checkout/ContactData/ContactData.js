@@ -4,6 +4,7 @@ import Button from '../../../components/UI/Button/Button';
 import Spinner from '../../../components/UI/Spinner/Spinner';
 import classes from './ContactData.css';
 import axios from '../../../axios-order';
+
 class ContactData extends Component {
   state = {
     name: '',
@@ -19,7 +20,7 @@ class ContactData extends Component {
     event.preventDefault();
     this.setState({ loading: true });
     const order = {
-      ingredients: this.state.ingredients,
+      ingredients: this.props.ingredients,
       price: this.props.price,
       customer: {
         name: 'Chad Saglam',
@@ -32,7 +33,7 @@ class ContactData extends Component {
       },
       deliveryMethod: 'fastest'
     }
-    axios.post('/order.json', order)
+    axios.post('/orders.json', order)
          .then(response => {
            this.setState({ loading: false });
            this.props.history.push('/');
